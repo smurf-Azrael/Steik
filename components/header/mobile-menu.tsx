@@ -1,8 +1,10 @@
 "use client"
 
 import React from "react"
+import Link from "next/link"
 
-import { Button } from "@/components/ui/button"
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import {
   Sheet,
   SheetClose,
@@ -22,19 +24,23 @@ export default function MobileMenu({ children }: MobileMenuProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here.
-          </SheetDescription>
-        </SheetHeader>
-        <div className="grid gap-4 py-4"></div>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
-          </SheetClose>
-        </SheetFooter>
+      <SheetContent className="py-16">
+        {siteConfig.mainNav?.length
+          ? siteConfig.mainNav?.map(
+              (item, index) =>
+                item.href && (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className={cn("mt-5 flex items-center text-lg")}
+                  >
+                    <p className="font-bebas  text-3xl text-custom">
+                      {item.title}
+                    </p>
+                  </Link>
+                )
+            )
+          : null}
       </SheetContent>
     </Sheet>
   )

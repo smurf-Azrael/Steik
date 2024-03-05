@@ -4,9 +4,7 @@ import Link from "next/link"
 import foxLogoSVG from "@/public/foxes-logo.svg"
 
 import { NavItem } from "@/types/nav"
-import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { Icons } from "@/components/icons"
 
 interface MainNavProps {
   items?: NavItem[]
