@@ -14,12 +14,12 @@ interface MainNavProps {
 
 export function MainNav({ items }: MainNavProps) {
   return (
-    <div className="flex gap-6 md:gap-10 w-full">
+    <div className="flex w-full gap-6 md:gap-10">
       <Link href="/" className="flex items-center space-x-2">
-        <Image src={foxLogoSVG} alt="Fox Logo" className="size-48" />
+        <Image src={foxLogoSVG} alt="Fox Logo" className="size-36 sm:size-48" />
       </Link>
       {items?.length ? (
-        <nav className="lg:flex gap-6 ml-auto mr-20 hidden">
+        <nav className="ml-auto mr-20 hidden gap-6 lg:flex">
           {items?.map(
             (item, index) =>
               item.href && (
@@ -27,7 +27,7 @@ export function MainNav({ items }: MainNavProps) {
                   key={index}
                   href={item.href}
                   className={cn(
-                    "flex items-center text-custom text-lg font-semibold",
+                    "flex items-center text-lg font-semibold text-custom",
                     item.disabled && "cursor-not-allowed opacity-80"
                   )}
                 >
