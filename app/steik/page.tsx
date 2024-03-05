@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import NFTContainer from "@/components/common/nft-container"
 import StatisticContainer from "@/components/common/statistic-contianer"
 
-export default function Dashboard() {
+export default function Steik() {
   return (
     <section className="pb-3 pt-6 px-16">
       <h1 className="font-bebas text-custom  text-5xl sm:text-7xl md:text-8xl lg:text-9xl mx-auto text-left">
