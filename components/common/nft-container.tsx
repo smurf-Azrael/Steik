@@ -9,17 +9,13 @@ interface NFTContainerProps {
 
 export default function NFTContainer({ kind, title }: NFTContainerProps) {
   return (
-    <div className="flex flex-col justfy-center items-center bg-white w-fit rounded-md">
-      <Image
-        src={NFT(kind)}
-        alt="Fox Logo"
-        className="size-36 md:size-48 lg:size-56"
-      />
-      <div className="flex items-end mt-2 mb-2 md:mt-2 md:mb-3 lg:mt-3 lg:mb-4">
-        <p className="text-custom leading-none text-lg md:text-xl xl:text-2xl ">
+    <div className="mx-auto flex w-fit flex-col items-center justify-start rounded-md bg-white">
+      <Image src={NFT(kind)} alt="Fox Logo" className="size-48 lg:size-56" />
+      <div className="my-2 flex items-end md:mb-3 md:mt-2 lg:mb-4 lg:mt-3">
+        <span className="text-lg !leading-none text-custom md:text-xl xl:text-2xl ">
           Fox
-        </p>
-        <span className="text-custom text-xs leading-none md:text-sm xl:text-md text-end">
+        </span>
+        <span className="xl:text-md text-end text-xs !leading-none text-custom md:text-sm">
           {title}
         </span>
       </div>
