@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import discordIcon from "@/public/discord-Icon.svg"
-import xIcon from "@/public/x-Icon.svg"
+import discordIcon from "@/public/discord.svg"
+import xIcon from "@/public/x.svg"
 
 import StatisticContainer from "@/components/common/statistic-contianer"
 
