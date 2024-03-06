@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import NFTContainer from "@/components/common/nft-container"
@@ -34,14 +36,15 @@ export default function Dashboard() {
         <NFTContainer kind={4} title={"#986"} />
       </div>
       <div className="mt-6 flex justify-end gap-6">
-        <Button className="h-8 whitespace-nowrap text-lg md:text-xl">
-          steik
+        <Button className="h-8 whitespace-nowrap text-lg md:text-xl" asChild>
+          <Link href="/steik?mode=steik">steik</Link>
         </Button>
         <Button
           className="h-8 whitespace-nowrap text-lg md:text-xl"
           variant={"gray"}
+          asChild
         >
-          unsteik
+          <Link href="/steik?mode=unsteik">unsteik</Link>
         </Button>
       </div>
     </section>
