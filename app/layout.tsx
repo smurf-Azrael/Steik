@@ -5,6 +5,7 @@ import { siteConfig } from "@/config/site"
 import { fontBebas, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { SiteHeader } from "@/components/header/site-header"
+import { SeiProvider } from "@/components/sei-provider"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -41,13 +42,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontBebas.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="flex-1">{children}</div>
-            </div>
-            <TailwindIndicator />
-          </ThemeProvider>
+          <SeiProvider
+            chainConfiguration={{
+              chainId: "pacific-1",
+              restUrl: "https://sei-api.polkachu.com/",
+              rpcUrl: "https://sei-rpc.polkachu.com/",
+            }}
+            wallets={["compass", "fin"]}
+          >
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <div className="relative flex min-h-screen flex-col">
+                <SiteHeader />
+                <div className="flex-1">{children}</div>
+              </div>
+              <TailwindIndicator />
+            </ThemeProvider>{" "}
+          </SeiProvider>
         </body>
       </html>
     </>
