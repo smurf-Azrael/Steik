@@ -11,7 +11,7 @@ export const siteConfig = {
     },
     {
       title: "Claim points",
-      href: "/steik",
+      href: "/stats",
     },
     {
       title: "Stats",
