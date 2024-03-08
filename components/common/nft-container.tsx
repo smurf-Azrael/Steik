@@ -9,7 +9,7 @@ interface NFTContainerProps {
 
 export default function NFTContainer({ kind, title }: NFTContainerProps) {
   return (
-    <div className="mx-auto flex w-fit flex-col items-center justify-start rounded-md bg-white">
+    <div className="mx-auto flex w-fit cursor-pointer flex-col items-center justify-start rounded-md bg-white transition-transform duration-200 hover:scale-105">
       <Image
         src={NFT(kind)}
         alt="Fox Logo"
