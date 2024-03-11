@@ -1,5 +1,14 @@
 "use client"
 
+import internal from "stream"
+import { useEffect, useState } from "react"
+import {
+  WalletConnectButton,
+  useCosmWasmClient,
+  useSigningCosmWasmClient,
+  useWallet,
+} from "@sei-js/react"
+
 import LineItem from "@/components/leaderboard/line-item"
 
 const lineitem_example = [
@@ -77,13 +86,53 @@ const lineitem_example = [
   },
 ]
 export default function Leaderboard() {
+  const [lbData, setLBData] = useState([])
+  const { connectedWallet, accounts } = useWallet()
+  const { cosmWasmClient: queryClient } = useCosmWasmClient()
+  const fetchLBData = async () => {
+    const response = await queryClient?.queryContractSmart(
+      process.env.NEXT_PUBLIC_STEIK_ADDRESS || "",
+      {
+        get_claimed_list: {},
+      }
+    )
+    console.log(response)
+    return response?.claimed_info
+  }
+  useEffect(() => {
+    // Function to fetch and update statistics
+    const fetchAndUpdate = () => {
+      if (connectedWallet) {
+        fetchLBData().then((res: any) => {
+          if (res?.length !== 0) {
+            const newLBData = res?.map((item: any, index: number) => {
+              return {
+                number: index + 1,
+                address: item.address,
+                self: false,
+                numPoints: parseInt(item.claimed_amount) / 1000000,
+              }
+            })
+            setLBData(newLBData)
+            // setTotalStaked(parseInt(res?.total_staked))
+            // setTotalClaimedPoints(parseInt(res?.total_claimed_points) / 1000000)
+          }
+        })
+      }
+    }
+    fetchAndUpdate()
+
+    // const interval = setInterval(fetchAndUpdate, 10000)
+
+    // return () => clearInterval(interval)
+  }, [accounts, connectedWallet, queryClient])
   return (
     <section className=" px-16 pb-3 pt-6">
       <div className="rounded-sm bg-[#FFFDF1] p-6">
         <p className="font-bebas text-2xl  text-custom sm:text-3xl md:text-4xl xl:text-5xl">
           LEADERBOARD
         </p>
-        {lineitem_example.map((lineitem) => {
+        {lbData?.map((lineitem: any) => {
           return (
             <LineItem
               number={lineitem.number}

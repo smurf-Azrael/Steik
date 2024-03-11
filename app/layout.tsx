@@ -44,11 +44,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <SeiProvider
             chainConfiguration={{
-              chainId: "pacific-1",
-              restUrl: "https://sei-api.polkachu.com/",
-              rpcUrl: "https://sei-rpc.polkachu.com/",
+              chainId: "atlantic-2",
+              restUrl: "https://sei-testnet-api.polkachu.com//",
+              rpcUrl: "https://sei-testnet-rpc.polkachu.com",
             }}
             wallets={["compass", "fin"]}
+            autoConnect="compass"
           >
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <div className="relative flex min-h-screen flex-col">
