@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import { CheckCircle } from "lucide-react"
 
 import NFT from "../utils/nfts"
 
@@ -52,9 +53,12 @@ export default function NFTContainer({
     "https://arweave.net/LPcSbe29BP10zETqtcCrS_JHuZ0AsiE2g0c4H-8G-eU/"
   return (
     <div
-      className={`mx-auto flex w-fit cursor-pointer flex-col items-center justify-start rounded-md transition-transform duration-200 hover:scale-105 ${selected ? "bg-blue-200" : "bg-white"}`}
+      className={`relative mx-auto flex w-fit cursor-pointer flex-col items-center justify-start rounded-md bg-white transition-transform duration-200 hover:scale-105`}
       onClick={onClick}
     >
+      {selected && (
+        <CheckCircle className="absolute right-2 top-2 size-5 text-green-500" />
+      )}
       <ResponsiveImage
         image={PIC_URL + kind + ".png"}
         alt="Fox Logo"

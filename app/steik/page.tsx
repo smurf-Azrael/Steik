@@ -5,16 +5,16 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { MsgExecuteContractEncodeObject } from "@cosmjs/cosmwasm-stargate"
 import { coins } from "@cosmjs/launchpad"
 import {
-  WalletConnectButton,
   useCosmWasmClient,
   useSigningCosmWasmClient,
   useWallet,
 } from "@sei-js/react"
+import toast from "react-hot-toast"
 
 import useContract from "@/hooks/useContract"
 import { Button } from "@/components/ui/button"
-import { useToast } from "@/components/ui/use-toast"
 import NFTContainer from "@/components/common/nft-container"
+import NFTContainerSkeleton from "@/components/common/nft-container-skeleton"
 
 export default function Steik() {
   const searchParams = useSearchParams()
@@ -23,7 +23,7 @@ export default function Steik() {
   const { cosmWasmClient: queryClient } = useCosmWasmClient()
   const { signingCosmWasmClient: signingClient } = useSigningCosmWasmClient()
   const { createExecuteMessage } = useContract()
-  const { toast } = useToast()
+  const [isLoading, setIsLoading] = useState(false)
 
   const fetchSteikCount = async () => {
     const response = await queryClient?.queryContractSmart(
@@ -106,7 +106,9 @@ export default function Steik() {
       )
     }
     if (!transactions.length) {
-      alert("Sorry☹️, failed steiking!")
+      toast.error("Sorry☹️, failed steiking!", {
+        position: "top-right",
+      })
       return
     }
     const fee = {
@@ -119,14 +121,19 @@ export default function Steik() {
         if (res.code !== 0) {
           throw new Error(res.rawLog)
         }
-        alert("Succeed in steiking. Good👍Luck!!")
+        toast.success("Succeed in steiking. Good👍Luck!!", {
+          position: "top-right",
+        })
       })
       .catch((e) => {
         console.log("debug error", e, typeof e)
-        alert("Sorry☹️, failed betting!!")
+        toast.error("Sorry☹️, failed steiking!", {
+          position: "top-right",
+        })
       })
       .finally(() => {
         console.log("refetch")
+        setIsLoading(true)
         fetchSteikCount().then((res: Array<string>) => {
           if (res?.length != 0) {
             const fetchedItems = res?.map((item: string, index: number) => ({
@@ -141,6 +148,7 @@ export default function Steik() {
           if (res?.length === 0) {
             setSelectedItems([])
           }
+          setIsLoading(false)
         })
       })
   }
@@ -179,7 +187,9 @@ export default function Steik() {
       )
     }
     if (!transactions.length) {
-      alert("Sorry☹️, failed steiking!")
+      toast.error("Sorry☹️, failed steiking!", {
+        position: "top-right",
+      })
       return
     }
     const fee = {
@@ -192,14 +202,19 @@ export default function Steik() {
         if (res.code !== 0) {
           throw new Error(res.rawLog)
         }
-        alert("Succeed in steiking. Good👍Luck!!")
+        toast.success("Succeed in steiking. Good👍Luck!!", {
+          position: "top-right",
+        })
       })
       .catch((e) => {
         console.log("debug error", e, typeof e)
-        alert("Sorry☹️, failed betting!!")
+        toast.error("Sorry☹️, failed steiking!", {
+          position: "top-right",
+        })
       })
       .finally(() => {
         console.log("refetch")
+        setIsLoading(true)
         fetchUnsteikCount().then((res: Array<string>) => {
           if (res?.length != 0) {
             const fetchedItems = res?.map((item: string, index: number) => ({
@@ -214,6 +229,7 @@ export default function Steik() {
           if (res?.length === 0) {
             setSelectedItems([])
           }
+          setIsLoading(false)
         })
       })
   }
@@ -244,6 +260,7 @@ export default function Steik() {
   useEffect(() => {
     console.log(accounts)
     if (connectedWallet) {
+      setIsLoading(true)
       mode === "steik"
         ? fetchSteikCount().then((res: Array<string>) => {
             if (res?.length != 0) {
@@ -256,6 +273,7 @@ export default function Steik() {
               console.log(fetchedItems, "fetchedItems----")
               setSelectedItems(fetchedItems)
             }
+            setIsLoading(false)
           })
         : fetchUnsteikCount().then((res: Array<string>) => {
             console.log(res, "this is response")
@@ -268,6 +286,7 @@ export default function Steik() {
               }))
               setSelectedItems(fetchedItems)
             }
+            setIsLoading(false)
           })
     }
   }, [accounts, connectedWallet, queryClient])
@@ -278,15 +297,25 @@ export default function Steik() {
         SELECT NFTS TO STEIK
       </p>
       <div className="mt-5 grid w-full grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5 ">
-        {selectedItems?.map((item, index) => (
-          <NFTContainer
-            id={index} // It's better to have a more unique key if possible
-            kind={item.kind}
-            title={item.title}
-            selected={item.selected}
-            onClick={() => toggleSelectedItem(index)}
-          />
-        ))}
+        {!isLoading ? (
+          selectedItems?.map((item, index) => (
+            <NFTContainer
+              id={index} // It's better to have a more unique key if possible
+              kind={item.kind}
+              title={item.title}
+              selected={item.selected}
+              onClick={() => toggleSelectedItem(index)}
+            />
+          ))
+        ) : (
+          <>
+            <NFTContainerSkeleton />
+            <NFTContainerSkeleton />
+            <NFTContainerSkeleton />
+            <NFTContainerSkeleton />
+            <NFTContainerSkeleton />
+          </>
+        )}
       </div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
         <div className="md:col-span-2 xl:col-span-4"></div>
