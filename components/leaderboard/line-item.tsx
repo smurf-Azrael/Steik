@@ -17,7 +17,7 @@ export default function LineItem({
   self = false,
 }: LineItemProps) {
   return (
-    <div className=" mx-auto mt-1 grid w-full grid-cols-4 flex-col items-center justify-start gap-2 rounded-md border border-solid border-[#003049] border-opacity-50 px-3 py-1">
+    <div className="mx-auto mt-1 grid w-full grid-cols-4 flex-col items-center justify-start gap-2 rounded-md border border-solid border-[#003049] border-opacity-50 px-3 py-1">
       <span className="text-lg font-bold !leading-none text-custom md:text-xl xl:text-2xl ">
         #{number}
       </span>

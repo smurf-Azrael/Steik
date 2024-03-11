@@ -1,5 +1,6 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
+import { Toaster } from "react-hot-toast"
 
 import { siteConfig } from "@/config/site"
 import { fontBebas, fontSans } from "@/lib/fonts"
@@ -44,13 +45,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <SeiProvider
             chainConfiguration={{
-              chainId: "pacific-1",
-              restUrl: "https://sei-api.polkachu.com/",
-              rpcUrl: "https://sei-rpc.polkachu.com/",
+              chainId: "atlantic-2",
+              restUrl: "https://sei-testnet-api.polkachu.com//",
+              rpcUrl: "https://sei-testnet-rpc.polkachu.com",
             }}
             wallets={["compass", "fin"]}
+            autoConnect="compass"
           >
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <Toaster />
               <div className="relative flex min-h-screen flex-col">
                 <SiteHeader />
                 <div className="flex-1">{children}</div>
