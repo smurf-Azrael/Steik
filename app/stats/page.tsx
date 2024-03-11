@@ -19,6 +19,7 @@ export default function Dashboard() {
   const [totalClaimedPoints, setTotalClaimedPoints] = useState(0)
   const [userUnclaimed, setUserUnclaimed] = useState(0)
   const [userClaimed, setUserClaimed] = useState(0)
+  const [isLoading, setIsLoading] = useState()
   const { connectedWallet, accounts } = useWallet()
   const { cosmWasmClient: queryClient } = useCosmWasmClient()
   const { signingCosmWasmClient: signingClient } = useSigningCosmWasmClient()

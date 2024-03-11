@@ -1,5 +1,6 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
+import { Toaster } from "react-hot-toast"
 
 import { siteConfig } from "@/config/site"
 import { fontBebas, fontSans } from "@/lib/fonts"
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             autoConnect="compass"
           >
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <Toaster />
               <div className="relative flex min-h-screen flex-col">
                 <SiteHeader />
                 <div className="flex-1">{children}</div>
