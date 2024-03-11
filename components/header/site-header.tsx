@@ -26,30 +26,26 @@ export function SiteHeader() {
   const [staked, setStaked] = useState(false)
   const [refresh, setRefresh] = useState(0)
 
-  const getStakeInfo = async () => {
-    try {
-      if (!accounts[0]) return
-      const response = await queryClient?.queryContractSmart(
-        marketplace_address,
-        {
-          get_staking: {
-            address: accounts[0]?.address,
-          },
-        }
-      )
-      if (response === undefined) {
-        setRefresh(refresh + 1)
-      }
-      if (response) setStaked(true)
-    } catch (err) {
-      console.log("get stake info error: ", err)
-    }
-  }
-  useEffect(() => {
-    if (connectedWallet) {
-      getStakeInfo()
-    }
-  }, [connectedWallet, refresh])
+  // const getStakeInfo = async () => {
+  //   try {
+  //     if (!accounts[0]) return
+  //     const response = await queryClient?.queryContractSmart(
+  //       marketplace_address,
+  //       {
+  //         get_staking: {
+  //           address: accounts[0]?.address,
+  //         },
+  //       }
+  //     )
+  //     if (response === undefined) {
+  //       setRefresh(refresh + 1)
+  //     }
+  //     if (response) setStaked(true)
+  //   } catch (err) {
+  //     console.log("get stake info error: ", err)
+  //   }
+  // }
+
   return (
     <header className="sticky top-0 z-0 w-full px-4">
       <div className="flex h-32 items-center space-x-4 sm:justify-between sm:space-x-0">
