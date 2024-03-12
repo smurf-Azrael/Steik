@@ -23,7 +23,7 @@ export default function Steik() {
   const { cosmWasmClient: queryClient } = useCosmWasmClient()
   const { signingCosmWasmClient: signingClient } = useSigningCosmWasmClient()
   const { createExecuteMessage } = useContract()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchSteikCount = async () => {
     const response = await queryClient?.queryContractSmart(
@@ -259,7 +259,7 @@ export default function Steik() {
   }
   useEffect(() => {
     console.log(accounts)
-    if (connectedWallet) {
+    if (queryClient && connectedWallet) {
       setIsLoading(true)
       mode === "steik"
         ? fetchSteikCount().then((res: Array<string>) => {
