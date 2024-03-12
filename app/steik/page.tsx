@@ -60,7 +60,7 @@ export default function Steik() {
           contractAddress: process.env.NEXT_PUBLIC_NFT_ADDRESS || "",
           message: {
             approve: {
-              token_id: "Fox" + checkedItems[0].title,
+              token_id: checkedItems[0].title,
               spender: process.env.NEXT_PUBLIC_STEIK_ADDRESS,
             },
           },
@@ -68,13 +68,13 @@ export default function Steik() {
         createExecuteMessage({
           senderAddress: accounts[0]?.address,
           contractAddress: process.env.NEXT_PUBLIC_STEIK_ADDRESS || "",
-          message: { steik: { token_id: "Fox" + checkedItems[0].title } },
-          funds: coins("200000", "usei"),
+          message: { steik: { token_id: checkedItems[0].title } },
+          funds: coins("2000000", "usei"),
         }),
       ]
     } else {
       console.log(
-        checkedItems.map((item) => "Fox" + item.title),
+        checkedItems.map((item) => item.title),
         "several case"
       )
       transactions = []
@@ -85,7 +85,7 @@ export default function Steik() {
             contractAddress: process.env.NEXT_PUBLIC_NFT_ADDRESS || "",
             message: {
               approve: {
-                token_id: "Fox" + item.title,
+                token_id: item.title,
                 spender: process.env.NEXT_PUBLIC_STEIK_ADDRESS,
               },
             },
@@ -98,10 +98,10 @@ export default function Steik() {
           contractAddress: process.env.NEXT_PUBLIC_STEIK_ADDRESS || "",
           message: {
             batch_steik: {
-              tokens: checkedItems.map((item) => "Fox" + item.title),
+              tokens: checkedItems.map((item) => item.title),
             },
           },
-          funds: coins("500000", "usei"),
+          funds: coins("5000000", "usei"),
         })
       )
     }
@@ -138,8 +138,8 @@ export default function Steik() {
           if (res?.length != 0) {
             const fetchedItems = res?.map((item: string, index: number) => ({
               id: index,
-              kind: item.slice(3),
-              title: item.slice(3),
+              kind: item,
+              title: item,
               selected: false,
             }))
             console.log(fetchedItems, "fetchedItems----")
@@ -163,13 +163,13 @@ export default function Steik() {
         createExecuteMessage({
           senderAddress: accounts[0]?.address,
           contractAddress: process.env.NEXT_PUBLIC_STEIK_ADDRESS || "",
-          message: { un_steik: { token_id: "Fox" + checkedItems[0].title } },
-          funds: coins("100000", "usei"),
+          message: { un_steik: { token_id: checkedItems[0].title } },
+          funds: coins("1000000", "usei"),
         }),
       ]
     } else {
       console.log(
-        checkedItems.map((item) => "Fox" + item.title),
+        checkedItems.map((item) => item.title),
         "several case"
       )
       transactions = []
@@ -179,10 +179,10 @@ export default function Steik() {
           contractAddress: process.env.NEXT_PUBLIC_STEIK_ADDRESS || "",
           message: {
             batch_unsteik: {
-              tokens: checkedItems.map((item) => "Fox" + item.title),
+              tokens: checkedItems.map((item) => item.title),
             },
           },
-          funds: coins("250000", "usei"),
+          funds: coins("2500000", "usei"),
         })
       )
     }
@@ -219,8 +219,8 @@ export default function Steik() {
           if (res?.length != 0) {
             const fetchedItems = res?.map((item: string, index: number) => ({
               id: index,
-              kind: item.slice(3),
-              title: item.slice(3),
+              kind: item,
+              title: item,
               selected: false,
             }))
             console.log(fetchedItems, "fetchedItems----")
@@ -266,8 +266,8 @@ export default function Steik() {
             if (res?.length != 0) {
               const fetchedItems = res?.map((item: string, index: number) => ({
                 id: index,
-                kind: item.slice(3),
-                title: item.slice(3),
+                kind: item,
+                title: item,
                 selected: false,
               }))
               console.log(fetchedItems, "fetchedItems----")
@@ -280,8 +280,8 @@ export default function Steik() {
             if (res?.length != 0) {
               const fetchedItems = res?.map((item: string, index: number) => ({
                 id: index,
-                kind: item.slice(3),
-                title: item.slice(3),
+                kind: item,
+                title: item,
                 selected: false,
               }))
               setSelectedItems(fetchedItems)

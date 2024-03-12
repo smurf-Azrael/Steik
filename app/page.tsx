@@ -36,11 +36,11 @@ export default function IndexPage() {
             content={"Foxes staked"}
             loading={statisticLoading}
           />
-          <StatisticContainer
+          {/* <StatisticContainer
             number={15641}
             content={"Daily points"}
             loading={statisticLoading}
-          />
+          /> */}
           <StatisticContainer
             number={totalClaimedPoints}
             content={"Total points"}

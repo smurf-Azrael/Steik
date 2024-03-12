@@ -66,7 +66,7 @@ export default function NFTContainer({
       />
       <div className="my-2 flex items-end md:mb-3 md:mt-2 lg:mb-4 lg:mt-3">
         <span className="text-lg !leading-none text-custom md:text-xl xl:text-2xl ">
-          Fox
+          FudFox
         </span>
         <span className="xl:text-md text-end text-xs !leading-none text-custom md:text-sm">
           {title}
