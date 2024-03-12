@@ -1,10 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { fetchStatistic } from "@/services/common/fetchStatistic"
 import { MsgExecuteContractEncodeObject } from "@cosmjs/cosmwasm-stargate"
-import { coins } from "@cosmjs/launchpad"
 import {
-  WalletConnectButton,
   useCosmWasmClient,
   useSigningCosmWasmClient,
   useWallet,
@@ -19,22 +18,14 @@ export default function Dashboard() {
   const [totalClaimedPoints, setTotalClaimedPoints] = useState(0)
   const [userUnclaimed, setUserUnclaimed] = useState(0)
   const [userClaimed, setUserClaimed] = useState(0)
-  const [isLoading, setIsLoading] = useState()
+  const [isCollectionLoading, setIsCollectionLoading] = useState(true)
+  const [isUserStatsLoading, setIsUserStatsLoading] = useState(true)
   const { connectedWallet, accounts } = useWallet()
   const { cosmWasmClient: queryClient } = useCosmWasmClient()
   const { signingCosmWasmClient: signingClient } = useSigningCosmWasmClient()
 
   const { createExecuteMessage } = useContract()
 
-  const fetchStatistic = async () => {
-    const response = await queryClient?.queryContractSmart(
-      process.env.NEXT_PUBLIC_STEIK_ADDRESS || "",
-      {
-        get_state: {},
-      }
-    )
-    return response?.state
-  }
   const fetchUserStatistic = async () => {
     const response = await queryClient?.queryContractSmart(
       process.env.NEXT_PUBLIC_STEIK_ADDRESS || "",
@@ -44,24 +35,27 @@ export default function Dashboard() {
         },
       }
     )
-    console.log(response, "user statistoc response")
+    console.log(response, "user statistic response")
     return response
   }
-  const fetchAndUpdate = () => {
-    if (connectedWallet) {
-      fetchStatistic().then((res: any) => {
-        if (res?.length !== 0) {
-          setTotalStaked(parseInt(res?.total_staked))
-          setTotalClaimedPoints(parseInt(res?.total_claimed_points) / 1000000)
-        }
-      })
+  const fetchAndUpdate = async () => {
+    if (connectedWallet && queryClient) {
+      setIsUserStatsLoading(true)
       fetchUserStatistic().then((res: any) => {
         if (res?.length !== 0) {
           setUserClaimed(parseInt(res?.claimed_amount) / 1000000)
           setUserUnclaimed(parseInt(res?.pending_reward) / 1000000)
         }
+        setIsUserStatsLoading(false)
       })
     }
+    fetchStatistic().then((res: any) => {
+      if (res?.length !== 0) {
+        setTotalStaked(parseInt(res?.total_staked))
+        setTotalClaimedPoints(parseInt(res?.total_claimed_points) / 1000000)
+        setIsCollectionLoading(false)
+      }
+    })
   }
   const handleClaim = async () => {
     let transactions: MsgExecuteContractEncodeObject[] = []
@@ -116,11 +110,14 @@ export default function Dashboard() {
   }
   useEffect(() => {
     // Function to fetch and update statistics
+    setIsCollectionLoading(true)
 
     fetchAndUpdate()
+      .then(() => {})
+      .catch((err) => {})
 
     // Set up an interval to fetch data every 15 seconds
-    const interval = setInterval(fetchAndUpdate, 10000)
+    const interval = setInterval(fetchAndUpdate, 20000)
 
     // Clean-up function to clear the interval when the component unmounts or dependencies change
     return () => clearInterval(interval)
@@ -132,11 +129,16 @@ export default function Dashboard() {
           COLLECTION STATS
         </p>
         <div className="mx-auto mt-3 flex flex-wrap items-center justify-center gap-8 sm:mb-4 sm:mt-4 sm:justify-between md:mb-8 md:mt-8 md:max-w-3xl lg:mb-10 lg:mt-10 xl:max-w-5xl">
-          <StatisticContainer number={totalStaked} content={"Foxes staked"} />
+          <StatisticContainer
+            number={totalStaked}
+            content={"Foxes staked"}
+            loading={isCollectionLoading}
+          />
           {/* <StatisticContainer number={15641} content={"Daily points"} /> */}
           <StatisticContainer
             number={totalClaimedPoints}
             content={"Total points"}
+            loading={isCollectionLoading}
           />
         </div>
       </div>
@@ -148,11 +150,17 @@ export default function Dashboard() {
           <StatisticContainer
             number={userClaimed + userUnclaimed}
             content={"Total points"}
+            loading={isUserStatsLoading}
           />
-          <StatisticContainer number={userClaimed} content={"Claimed points"} />
+          <StatisticContainer
+            number={userClaimed}
+            content={"Claimed points"}
+            loading={isUserStatsLoading}
+          />
           <StatisticContainer
             number={userUnclaimed}
             content={"Unclaimed points"}
+            loading={isUserStatsLoading}
           />
         </div>
         <div className="mt-4 flex w-5/6 justify-end">
