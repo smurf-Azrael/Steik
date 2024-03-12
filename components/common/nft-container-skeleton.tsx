@@ -1,11 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import { CheckCircle } from "lucide-react"
-
 import { Skeleton } from "../ui/skeleton"
-import NFT from "../utils/nfts"
 
 export default function NFTContainerSkeleton() {
   return (
