@@ -45,9 +45,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <SeiProvider
             chainConfiguration={{
-              chainId: "atlantic-2",
-              restUrl: "https://sei-testnet-api.polkachu.com//",
-              rpcUrl: "https://sei-testnet-rpc.polkachu.com",
+              chainId: "pacific-1",
+              restUrl: "https://sei-api.polkachu.com/",
+              rpcUrl: "https://sei-rpc.polkachu.com/",
             }}
             wallets={["compass", "fin"]}
             autoConnect="compass"

@@ -45,8 +45,8 @@ export default function Dashboard() {
         if (res?.length != 0) {
           const fetchedItems = res?.map((item: string, index: number) => ({
             id: index,
-            kind: item.slice(3),
-            title: item.slice(3),
+            kind: item,
+            title: item,
             selected: false,
           }))
           console.log(fetchedItems, "fetchedItems----")
