@@ -47,7 +47,7 @@ export function SiteHeader() {
   // }
 
   return (
-    <header className="sticky top-0 z-0 w-full px-4">
+    <header className="sticky top-0 z-50 w-full bg-transparent px-4 backdrop-blur-lg">
       <div className="flex h-32 items-center space-x-4 sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
