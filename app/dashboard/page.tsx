@@ -16,20 +16,16 @@ export default function Dashboard() {
   const [totalClaimedPoints, setTotalClaimedPoints] = useState(0)
   const [isNFTLoading, setIsNFTLoading] = useState(true)
   const [statisticLoading, setStatisticLoading] = useState(true)
-  const fetchCount = async () => {
-    console.log("contract address", process.env.NEXT_PUBLIC_NFT_ADDRESS)
-    console.log("account address", accounts[0]?.address)
+  const fetchUnsteikCount = async () => {
     const response = await queryClient?.queryContractSmart(
-      process.env.NEXT_PUBLIC_NFT_ADDRESS || "",
+      process.env.NEXT_PUBLIC_STEIK_ADDRESS || "",
       {
-        tokens: {
-          owner: accounts[0]?.address,
-        },
+        get_steiker_info: { address: accounts[0]?.address, limit: 30 },
       }
     )
     console.log(accounts, "accounts")
     console.log(response, "response")
-    return response?.tokens
+    return response?.steik_info?.map((item: any) => item?.token_id)
   }
 
   const { connectedWallet, accounts } = useWallet()
@@ -41,7 +37,7 @@ export default function Dashboard() {
     console.log(accounts)
     if (connectedWallet && queryClient) {
       setIsNFTLoading(true)
-      fetchCount().then((res: Array<string>) => {
+      fetchUnsteikCount().then((res: Array<string>) => {
         if (res?.length != 0) {
           const fetchedItems = res?.map((item: string, index: number) => ({
             id: index,
@@ -51,9 +47,13 @@ export default function Dashboard() {
           }))
           console.log(fetchedItems, "fetchedItems----")
           setSelectedItems(fetchedItems)
-          setIsNFTLoading(false)
         }
+        setIsNFTLoading(false)
       })
+    }
+    if (!connectedWallet) {
+      setIsNFTLoading(false)
+      setSelectedItems([])
     }
     setStatisticLoading(true)
     fetchStatistic().then((res: any) => {

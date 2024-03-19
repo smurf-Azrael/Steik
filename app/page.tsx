@@ -53,14 +53,14 @@ export default function IndexPage() {
           <Image
             src={xIcon}
             alt="Fox Logo"
-            className="size-8 md:size-10 lg:size-14"
+            className="size-4 md:size-6 lg:size-8"
           />
         </Link>
         <Link href="/" className="flex items-center space-x-2">
           <Image
             src={discordIcon}
             alt="Fox Logo"
-            className="size-8 md:size-10 lg:size-14"
+            className="size-4 md:size-6 lg:size-8"
           />
         </Link>
       </div>
