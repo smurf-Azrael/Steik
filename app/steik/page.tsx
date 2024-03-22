@@ -113,7 +113,7 @@ export default function Steik() {
     }
     const fee = {
       amount: [{ amount: "0.1", denom: "usei" }],
-      gas: "700000",
+      gas: (checkedItems.length * 700000).toString(),
     }
     signingClient
       ?.signAndBroadcast(accounts[0]?.address, transactions, fee)
@@ -194,7 +194,7 @@ export default function Steik() {
     }
     const fee = {
       amount: [{ amount: "0.1", denom: "usei" }],
-      gas: "700000",
+      gas: (checkedItems.length * 700000).toString(),
     }
     signingClient
       ?.signAndBroadcast(accounts[0]?.address, transactions, fee)
