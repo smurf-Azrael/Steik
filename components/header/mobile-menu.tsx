@@ -24,7 +24,7 @@ export default function MobileMenu({ children }: MobileMenuProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="py-16">
+      <SheetContent className="bg-[#42543C] py-16">
         {siteConfig.mainNav?.length
           ? siteConfig.mainNav?.map(
               (item, index) =>
