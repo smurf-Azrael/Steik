@@ -52,9 +52,9 @@ export function SiteHeader() {
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="ml-16 flex items-center space-x-1">
-            <div className=" flex w-44 justify-center gap-2 rounded-md bg-[#003049] px-2 py-1 shadow shadow-black/25 hover:bg-[#003049] ">
+            <div className=" flex w-44 justify-center gap-2 rounded-md bg-[#FFD700] px-2 py-1 shadow shadow-black/25 hover:bg-[#FFC700] ">
               {connectedWallet ? <Image src={SeiIcon} alt="sei" /> : <></>}
-              <WalletConnectButton buttonClassName="text-center text-[20px] text-[#FDF0D5]  capitalize  whitespace-nowrap" />
+              <WalletConnectButton buttonClassName="text-center text-[20px] text-[#42543C]  capitalize  whitespace-nowrap" />
             </div>
             <MobileMenu>
               <Button variant="ghost" size="icon" className="ml-2 lg:hidden">

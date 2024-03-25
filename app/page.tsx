@@ -28,12 +28,12 @@ export default function IndexPage() {
     <section className="container pb-3 pt-6 md:py-10">
       <div className="mt-32">
         <h1 className="text-shadow mx-auto text-center font-bebas text-5xl text-custom sm:text-7xl md:text-8xl lg:text-9xl">
-          STEIK YOUR FOXES
+          Welcome to the Farm!
         </h1>
         <div className="mx-auto mt-3 flex flex-wrap justify-center gap-8 sm:mt-4 sm:justify-between md:mt-8 md:max-w-3xl lg:mt-10 xl:max-w-5xl">
           <StatisticContainer
             number={totalStaked}
-            content={"Foxes staked"}
+            content={"Llamas steiked"}
             loading={statisticLoading}
           />
           {/* <StatisticContainer
