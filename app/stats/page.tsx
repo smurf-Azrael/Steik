@@ -124,14 +124,14 @@ export default function Dashboard() {
   }, [accounts, connectedWallet, queryClient])
   return (
     <section className="px-16 pb-3 pt-6">
-      <div className="rounded bg-[#FFFDF1] p-6">
+      <div className="rounded bg-[#1B2219] p-6">
         <p className="font-bebas text-2xl  text-custom sm:text-3xl md:text-4xl xl:text-5xl">
           COLLECTION STATS
         </p>
         <div className="mx-auto mt-3 flex flex-wrap items-center justify-center gap-8 sm:mb-4 sm:mt-4 sm:justify-between md:mb-8 md:mt-8 md:max-w-3xl lg:mb-10 lg:mt-10 xl:max-w-5xl">
           <StatisticContainer
             number={totalStaked}
-            content={"Foxes staked"}
+            content={"Llamas steiked"}
             loading={isCollectionLoading}
           />
           {/* <StatisticContainer number={15641} content={"Daily points"} /> */}
@@ -142,7 +142,7 @@ export default function Dashboard() {
           />
         </div>
       </div>
-      <div className="mt-10 rounded bg-[#FFFDF1] p-6">
+      <div className="mt-10 rounded bg-[#1B2219] p-6">
         <p className="font-bebas text-2xl  text-custom sm:text-3xl md:text-4xl xl:text-5xl">
           MY STATS
         </p>

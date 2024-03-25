@@ -67,15 +67,15 @@ export default function Dashboard() {
   return (
     <section className="px-16 pb-3 pt-6">
       <h1 className="mx-auto text-left  font-bebas text-5xl text-custom sm:text-7xl md:text-8xl lg:text-9xl">
-        STEIK YOUR FOXES
+        Welcome to the Farm!
       </h1>
       <p className="text-lg font-bold text-custom sm:text-xl md:text-2xl xl:text-3xl">
-        Earn points daily.
+        Clothing Optional.
       </p>
       <div className="mx-auto mt-3 flex flex-wrap items-center justify-center gap-8 sm:mt-4 sm:justify-between md:mt-8 md:max-w-3xl lg:mt-10 xl:max-w-5xl">
         <StatisticContainer
           number={totalStaked}
-          content={"Foxes staked"}
+          content={"Llamas steiked"}
           loading={statisticLoading}
         />
         {/* <StatisticContainer number={15641} content={"Daily points"} /> */}
@@ -88,7 +88,7 @@ export default function Dashboard() {
           claim points
         </Button> */}
       </div>
-      <Separator className="mt-4 border border-solid border-[#003049]" />
+      <Separator className="mt-4 border border-solid border-[#FFD700]" />
       <p className="mt-3 text-lg font-bold text-custom md:text-xl xl:text-2xl">
         Steiked NFTs
       </p>

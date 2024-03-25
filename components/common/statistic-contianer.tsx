@@ -13,7 +13,7 @@ export default function StatisticContainer({
   return (
     <div className="justfy-center flex flex-col items-center">
       {loading ? (
-        <Loader2 className="animate-spin" />
+        <Loader2 className="animate-spin text-custom" />
       ) : (
         <p className="text-3xl font-bold text-custom sm:text-4xl md:text-5xl xl:text-6xl">
           {number}
