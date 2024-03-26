@@ -41,7 +41,7 @@ export default function Leaderboard() {
     // return () => clearInterval(interval)
   }, [accounts, connectedWallet])
   return (
-    <section className=" px-16 pb-3 pt-6">
+    <section className="px-4 pb-3 pt-6 sm:px-6 md:px-10 lg:px-16">
       <div className="rounded-sm bg-[#FFFDF1] p-6">
         <p className="font-bebas text-2xl  text-custom sm:text-3xl md:text-4xl xl:text-5xl">
           LEADERBOARD

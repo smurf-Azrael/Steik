@@ -3,7 +3,7 @@ export type SiteConfig = typeof siteConfig
 export const siteConfig = {
   name: "Steik",
   description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
+    "Steik is of its kind staking platform with realtime points mechanism on Sei Network. Steik. Accumulate. Get rewarded.",
   mainNav: [
     {
       title: "Home",
